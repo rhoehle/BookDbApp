@@ -2,6 +2,7 @@ package controller;
 
 import model.ListItem;
 
+//import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * @author Robert Hoehle
  */
+//@Entity
 public class ListItemHelper {
 
     static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("BookDbApp");
@@ -25,7 +27,8 @@ public class ListItemHelper {
 
     public List<ListItem> showAllItems() {
         EntityManager em = emfactory.createEntityManager();
-        List<ListItem> allItems = em.createQuery("SELECT i FROM ListItem i").getResultList();
+        @SuppressWarnings("unchecked")
+		List<ListItem> allItems = em.createQuery("SELECT i FROM ListItem i").getResultList();
         return allItems;
     }
 
