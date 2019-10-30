@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
-          <factory-entry name="BookDbApp" value="137a7433-0d1b-4981-9e82-f34b84e51732" />
+          <factory-entry name="BookDbWebApp2" value="137a7433-0d1b-4981-9e82-f34b84e51732" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />

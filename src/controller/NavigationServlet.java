@@ -7,28 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ListItem;
+import model.ListBook;
 
 /**
  * Servlet implementation class navigationServlet
  */
-@WebServlet("/navigationServlet")
-public class navigationServlet extends HttpServlet {
+@WebServlet("/NavigationServlet")
+public class NavigationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public navigationServlet() {
+    public NavigationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -36,39 +34,34 @@ public class navigationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
 		
-		ListItemHelper dao = new ListItemHelper();
-		String act = request.getParameter("doThisToItem");
+		ListBookHelper bh = new ListBookHelper();
+		String act = request.getParameter("doThisToBook");
 		
 		if (act == null) {
-		 //no button has been selected
-		getServletContext().getRequestDispatcher("/viewAllItemsServlet").
-		
-		forward(request, response);
+		getServletContext().getRequestDispatcher("/ViewAllBooksServlet").forward(request, response);
 		
 		} else if (act.equals("delete")) 
 			try {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
-			ListItem itemToDelete = dao.searchForItemById(tempId);
-			dao.deleteItem(itemToDelete);
+			ListBook bookToDelete = bh.searchForBookById(tempId);
+			bh.deleteBook(bookToDelete);
 			
 			} catch (NumberFormatException e) {
-			System.out.println("Forgot to click a button");
+			System.out.println("Forgot to select an entry.");
 			
 			} finally {
-				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+				getServletContext().getRequestDispatcher("/ViewAllBooksServlet").forward(request, response);
 				
 		} else if (act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));
-			ListItem itemToEdit = dao.searchForItemById(tempId);
-			request.setAttribute("itemToEdit", itemToEdit);
+			ListBook bookToEdit = bh.searchForBookById(tempId);
+			request.setAttribute("bookToEdit", bookToEdit);
 			getServletContext().getRequestDispatcher("/edit-item.jsp").forward(request, response);
 				
 			} catch (NumberFormatException e) {
-				getServletContext().getRequestDispatcher("/viewAllItemsServlet").
+				getServletContext().getRequestDispatcher("/ViewAllBooksServlet").
 				forward(request, response);
 			}	
 			

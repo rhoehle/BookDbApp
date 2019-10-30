@@ -1,8 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="BookDbWebApp">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="BookDbWebApp"/>
-        <property name="java-output-path" value="/BookDbWebApp/target/classes"/>
-    </wb-module>
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId"
+	project-version="1.5.0">
+	<wb-module deploy-name="BookDbWebApp2-1.0-SNAPSHOT">
+		<wb-resource deploy-path="/"
+			source-path="/target/m2e-wtp/web-resources" />
+		<wb-resource deploy-path="/" source-path="/WebContent"
+			tag="defaultRootSource" />
+		<wb-resource deploy-path="/WEB-INF/classes"
+			source-path="/src" />
+		<wb-resource deploy-path="/WEB-INF/classes"
+			source-path="/src/META-INF" />
+		<property name="java-output-path"
+			value="/BookDbWebApp/target/classes" />
+		<property name="context-root" value="BookDbWebApp2" />
+	</wb-module>
 </project-modules>

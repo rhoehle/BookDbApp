@@ -1,25 +1,28 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ListItem;
+import model.BookDetails;
+import model.ListBook;
 
 /**
- * Servlet implementation class editItemServlet
+ * Servlet implementation class ViewBookDetails
  */
-@WebServlet("/editItemServlet")
-public class editItemServlet extends HttpServlet {
+@WebServlet("/ViewBookDetailsServlet")
+public class ViewBookDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editItemServlet() {
+    public ViewBookDetailsServlet() {
         super();
     }
 
@@ -27,26 +30,24 @@ public class editItemServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		
+		BookDetailsHelper bdh = new BookDetailsHelper();		
+		List<BookDetails> z = bdh.getBookDetails();
+		request.setAttribute("allBookDetails", z);
+		
+		if(z.isEmpty()) {
+			request.setAttribute("allBookDetails", " ");
+		}
+		
+		getServletContext().getRequestDispatcher("/book-details-by-reader.jsp").forward(request, response);
+		
+ 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ListItemHelper dao = new ListItemHelper();
-		
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		Integer tempId = Integer.parseInt(request.getParameter("id"));
-		
-		ListItem itemToUpdate = dao.searchForItemById(tempId);
-		itemToUpdate.setTitle(title);
-		itemToUpdate.setAuthor(author);
-		dao.updateItem(itemToUpdate);
-		getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+		doGet(request, response);
 	}
 
 }

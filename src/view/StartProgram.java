@@ -1,7 +1,7 @@
 package view;
 
-import controller.ListItemHelper;
-import model.ListItem;
+import controller.ListBookHelper;
+import model.ListBook;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class StartProgram {
 
     static Scanner in = new Scanner(System.in);
-    static ListItemHelper lih = new ListItemHelper();
+    static ListBookHelper lih = new ListBookHelper();
 
     private static void addAnItem() {
 
@@ -21,8 +21,8 @@ public class StartProgram {
         System.out.print("Enter an author: ");
         String item = in.nextLine();
 
-        ListItem toAdd = new ListItem(store, item);
-        lih.insertItem(toAdd);
+        ListBook toAdd = new ListBook(store, item);
+        lih.insertBook(toAdd);
     }
 
     private static void deleteAnItem() {
@@ -32,7 +32,7 @@ public class StartProgram {
         System.out.print("Enter the author to delete: ");
         String item = in.nextLine();
 
-        ListItem toDelete = new ListItem(store, item);
+        ListBook toDelete = new ListBook(store, item);
         lih.deleteItem(toDelete);
     }
 
@@ -43,7 +43,7 @@ public class StartProgram {
         System.out.println("2 - Search by Author");
         int searchBy = in.nextInt();
         in.nextLine();
-        List<ListItem> foundItems;
+        List<ListBook> foundItems;
         if (searchBy == 1) {
             System.out.print("Enter the book title: ");
             String titleName = in.nextLine();
@@ -56,13 +56,13 @@ public class StartProgram {
 
         if (!foundItems.isEmpty()) {
             System.out.println("Found Results.");
-            for (ListItem l : foundItems) {
+            for (ListBook l : foundItems) {
                 System.out.println(l.getId() + " : " + l.returnItemDetails());
             }
             System.out.print("Which ID to edit: ");
             int idToEdit = in.nextInt();
 
-            ListItem toEdit = lih.searchForItemById(idToEdit);
+            ListBook toEdit = lih.searchForItemById(idToEdit);
             System.out.println("Retrieved " + toEdit.getTitle() + " from " + toEdit.getAuthor());
             System.out.println("1 - Update Title");
             System.out.println("2 - Update Author");
@@ -134,9 +134,9 @@ public class StartProgram {
     }
 
     private static void viewTheList() {
-        ListItemHelper lih = new ListItemHelper();
-        List<ListItem> allItems = lih.showAllItems();
-        for(ListItem singleItem : allItems){
+        ListBookHelper lih = new ListBookHelper();
+        List<ListBook> allItems = lih.showAllBooks();
+        for(ListBook singleItem : allItems){
             System.out.println(singleItem.returnItemDetails());
         }
         System.out.println(" ");
